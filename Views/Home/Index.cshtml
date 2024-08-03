@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(50%); 
+    }
+
+    .hero-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        z-index: 1;
+    }
+
+    .body-content {
+        margin-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding-left: 200px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        justify-content: center;
+        height: 60vh;
+    }
+
+    .btn-custom {
+        margin: 8px;
+        padding: 10px 20px;
+        background-color: #00ffc1;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 259px;
+        height: 225px;
+    }
+        .btn-custom:hover {
+            transform: scale(1.2);
+        }
+
+    .button-icon {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    .content-container {
+        margin-top: 10px;
+        margin-bottom: 90px;
+    }
+</style>
+
+<div class="hero-container">
+    <img src="~/pic/children.jpg" class="hero-image" alt="Hero Image">
+    <div class="hero-text">
+        <h1>Empowering Road Children</h1>
+        <p>Providing Food and Hope for a Better Tomorrow</p>
+        <p>Your support can make a difference in the lives of vulnerable children.</p>
+    </div>
+    </div>
+</div>
+
+<main>
+    <button class="btn btn-custom" id="AdminButton">
+        <img src="~/pic/admin.png" alt="Admin" class="button-icon">
+        Admin
+    </button>
+
+    <button class="btn btn-custom" id="Employee">
+        <img src="~/pic/employee.png" alt="Employee" class="button-icon">
+        Employee
+    </button>
+
+    <button class="btn btn-custom" id="restaurantButton">
+        <img src="~/pic/res.png" alt="Restaurant" class="button-icon">
+        Restaurant
+    </button>
+</main>
+
+<script>
+    document.getElementById("AdminButton").addEventListener("click", function () {
+        window.location.href = "/Login/login?id=1";
+    });
+
+    document.getElementById("Employee").addEventListener("click", function () {
+        window.location.href = "/Login/login?id=3";
+    });
+
+    document.getElementById("restaurantButton").addEventListener("click", function () {
+        window.location.href = "/Login/login?id=2";
+    });
+</script>

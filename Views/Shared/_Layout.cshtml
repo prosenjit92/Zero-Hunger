@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+@*    @Styles.Render("~/Content/css")
+*@
+    
+    <link rel="stylesheet" href="~/CSS/Layout_style.css" />
+@*    @Scripts.Render("~/bundles/modernizr")
+*@</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+            <div class="brand-container">
+                @Html.ActionLink("Zero Hunger", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">@Html.ActionLink("Home", "SignOut", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("About", "SignOut", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "SignOut", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @if (Session["log"] != null)
+                    {
+                        <li class="nav-item">@Html.ActionLink("Sign Out", "SignOut", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-container">
+        @RenderBody()
+    </div>
+
+    <footer>
+        &copy; 2023 Zero Hunger Foundation. All rights reserved.
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

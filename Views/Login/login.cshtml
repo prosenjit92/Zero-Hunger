@@ -1,0 +1,47 @@
+﻿@model Zero_Hunger.EF.Restaurant
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="~/CSS/Login_dtylr.css" />
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+
+        <form method="post" action="">
+            <input type="hidden" value="@ViewBag.id" name="id" /> 
+            <label for="username">Username:</label>
+            <input class="form-control" type="text" name="username" id="username" placeholder="Enter username" required />
+
+            <label for="password">Password:</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Enter password" required />
+
+            <br />
+
+            <input type="submit" value="Login" />
+
+             <a href="~/Controllers/HomeController.cs">Back to home</a>
+        </form>
+    </div>
+</body>
+</html>
+
+
+@if (Session["password"] != null)
+{
+    <p>@Session["password"]</p>
+}

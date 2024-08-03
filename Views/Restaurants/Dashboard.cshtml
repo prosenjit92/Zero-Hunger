@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Zero_Hunger.DTOs.RequestDTO>
+
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    td {
+        background-color: #f9f9f9;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        margin-right: 10px;
+    }
+</style>
+
+<h2>Dashboard</h2>
+
+<main>
+    <form action="/Restaurants/Request_send" method="get">
+        <button class="btn btn-primary" id="restaurantButt">Send Collect Request</button>
+    </form>
+
+    <form action="/Restaurants/Show_all_donation" method="get">
+        <button class="btn btn-primary" id="restaurantButt">Show All Donation</button>
+    </form>
+
+    @if (Model == null || !Model.Any())
+    {
+        <h1>No Requests are available</h1>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>Request ID</th>
+                <th>Type of Food</th>
+                <th>Phone</th>
+                <th>Quantity</th>
+                <th>Max Preservation Time</th>
+                <th>Food Details</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Assigned Employee ID</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.req_id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.food_type)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.max_preservation_time)</td>
+                    <td>@Html.DisplayFor(modelItem => item.details_food)</td>
+                    <td>@Html.DisplayFor(modelItem => item.location)</td>
+                    <td>@Html.DisplayFor(modelItem => item.status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.assigned_employee_id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.date_of_order)</td>
+                    <td>
+                        <a href="#">Edit</a>
+                        <a href="#">Details</a>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</main>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Zero_Hunger_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="emp_id" />
+    </Key>
+    <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="availability" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Requests" Relationship="Zero_Hunger_dbModel.FK_Requests_employees" FromRole="employee" ToRole="Request" />
+  </EntityType>
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="req_id" />
+    </Key>
+    <Property Name="req_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="food_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="max_preservation_time" Type="Int32" />
+    <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="rest_id" Type="Int32" />
+    <Property Name="assigned_employee_id" Type="Int32" />
+    <Property Name="details_food" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="date_of_order" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="employee" Relationship="Zero_Hunger_dbModel.FK_Requests_employees" FromRole="Request" ToRole="employee" />
+    <NavigationProperty Name="Restaurant" Relationship="Zero_Hunger_dbModel.FK_Requests_Restaurants" FromRole="Request" ToRole="Restaurant" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="restaurants_id" />
+    </Key>
+    <Property Name="restaurants_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rest_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="rest_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="res_location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="res_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="res_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="res_username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="res_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Requests" Relationship="Zero_Hunger_dbModel.FK_Requests_Restaurants" FromRole="Restaurant" ToRole="Request" />
+  </EntityType>
+  <EntityContainer Name="Zero_Hunger_dbEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="Requests" EntityType="Self.Request" />
+    <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+    <AssociationSet Name="FK_Requests_employees" Association="Zero_Hunger_dbModel.FK_Requests_employees">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requests_Restaurants" Association="Zero_Hunger_dbModel.FK_Requests_Restaurants">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Requests_employees">
+    <End Type="Zero_Hunger_dbModel.employee" Role="employee" Multiplicity="0..1" />
+    <End Type="Zero_Hunger_dbModel.Request" Role="Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="assigned_employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requests_Restaurants">
+    <End Type="Zero_Hunger_dbModel.Restaurant" Role="Restaurant" Multiplicity="0..1" />
+    <End Type="Zero_Hunger_dbModel.Request" Role="Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="restaurants_id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="rest_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,259 @@
+﻿@model IEnumerable<Zero_Hunger.DTOs.RequestDTO>
+
+@{
+    ViewBag.Title = "Admin_Dashboard";
+}
+
+<style>
+    .dashboard-container {
+        margin: 20px;
+    }
+
+    .dashboard-section {
+        margin-bottom: 20px;
+    }
+
+        .dashboard-section h3 {
+            border-bottom: 1px solid #ddd;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn-link {
+        color: #007bff;
+        cursor: pointer;
+    }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+
+
+<div class="dashboard-container">
+    <div class="dashboard-section">
+        <h2>Admin Dashboard</h2>
+        <p class="btn btn-primary">
+            @Html.ActionLink("Show All Employee update", "show_all")
+        </p>
+    </div>
+
+    <div class="dashboard-section">
+        <h3>Pending Requests</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Request Id
+                </th>
+                <th>
+                    Type of Food
+                </th>
+                <th>
+                    Restaurant Email
+                </th>
+                <th>
+                    Contact Number
+                </th>
+                <th>
+                    Food Quantity
+                </th>
+                <th>
+                    Max preservation Time
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Restaurent name
+                </th>
+                <th>
+                    Assigned Employee
+                </th>
+                <th>
+                    Food Details
+                </th>
+                <th>
+                    Order Date
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.status == "pendding")
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.req_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.food_type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.max_preservation_time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rest_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.assigned_employee_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.details_food)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date_of_order)
+                        </td>
+                        <td>
+                            @Html.ActionLink("assign", "Edit", new { id = item.req_id }) |
+
+                            @Html.ActionLink("Delete", "Delete", new { id = item.req_id })
+                        </td>
+                    </tr>
+
+                }
+            }
+
+        </table>
+
+
+        @*----------------------------------------------------------------------------------------------------*@
+
+    </div>
+
+    <div class="dashboard-section">
+        <h3>Assigned Requests</h3>
+        <table class="table">
+
+
+
+
+            <tr>
+                <th>
+                    Request Id
+                </th>
+                <th>
+                    Type of Food
+                </th>
+                <th>
+                    Restaurant Email
+                </th>
+                <th>
+                    Contact Number
+                </th>
+                <th>
+                    Food Quantity
+                </th>
+                <th>
+                    Max preservation Time
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Restaurent name
+                </th>
+                <th>
+                    Assigned Employee
+                </th>
+                <th>
+                    Food Details
+                </th>
+                <th>
+                    Order Date
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.status != "pendding")
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.req_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.food_type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.max_preservation_time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rest_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.assigned_employee_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.details_food)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date_of_order)
+                        </td>
+                        <td>
+
+                            @Html.ActionLink("Delete", "Delete", new { id = item.req_id })
+                        </td>
+                    </tr>
+
+                }
+            }
+
+        </table>
+    </div>
+</div>

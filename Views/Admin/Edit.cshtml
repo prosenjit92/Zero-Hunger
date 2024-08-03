@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Zero_Hunger.DTOs.EmployeeDTO>
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Employee Id
+        </th>
+        <th>
+            Name:
+        </th>
+        
+        <th>
+           Email
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+           Address
+        </th>
+        <th>
+            Role
+        </th>
+        <th>
+            Availability
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.availability == "available")
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.availability)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Assign", "Assign", new { id = item.emp_id }) |
+        </td>
+    </tr>
+    }
+}
+
+</table>
